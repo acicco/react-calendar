@@ -1,5 +1,4 @@
 import {ADD_REMINDER, GET_REMINDERS_BY_ID} from '../actions/types';
-import moment from 'moment';
 
 const initialState = {
     allReminders: []
