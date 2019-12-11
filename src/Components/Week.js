@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Day from './Day';
+import uuid from 'uuid';
 
 export default class Week extends Component {
 
@@ -9,8 +10,8 @@ export default class Week extends Component {
             <div className="table-row">
                {week.map( day => {
                    return (
-                       <div className="table-data">
-                           <Day day={day} today={today}/>
+                       <div key={uuid.v4()} className="table-data">
+                           <Day key={uuid.v4()} day={day} today={today}/>
                        </div>
                    )
                })} 

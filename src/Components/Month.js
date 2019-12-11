@@ -1,38 +1,35 @@
 import React, { Component } from 'react'
 import moment from 'moment';
-import Day from './Day';
 import Week from './Week';
+import {getMonth} from '../helpers/dateUtil';
+import uuid from 'uuid';
 
 let weekDays = moment.weekdays().map( day => {
     return (
-        <th key={day} className="table-head">
+        <div key={uuid.v4()} className="table-head">
             {day}
-        </th>
+        </div>
     )
 });
 
-let today = moment();
-let startOfTheMonth = moment().startOf('month');
-let endOfTheMonth = moment().endOf('month');
-let startDate = startOfTheMonth.startOf('week');
-let endDate = endOfTheMonth.endOf('week')
-let days = [];
-let weeks = [];
-let day = startDate;
-
-while (day <= endDate) {
-    for (let i = 0; i < 7; i++) {
-        days.push(moment(day));
-        day.add(1, 'days');
-    }
-    weeks.push(days);
-    days = [];
-}
-
-
-
+const today = moment();
+const {weeks} = getMonth(today);
 
 export default class Month extends Component {
+    state = {
+        startOfTheMonth: moment().startOf('month'),
+        endOfTheMonth : moment().endOf('month'),
+    }
+    
+
+    nextMonth () {
+        let c = this.state.startOfTheMonth;
+        let e = this.state.endOfTheMonth;
+        this.setState({
+            startOfTheMonth: c.add(1, 'month'),
+            endOfTheMonth: e.add(1, 'month')
+        });
+    }
     render() {
         return (
             <div className="table">
@@ -40,8 +37,9 @@ export default class Month extends Component {
                     {weekDays}
                 </div>
                 <div className="table-body">
-                    {weeks.map(week =>  <Week week={week} today={today}/>)}
+                    {weeks.map(week =>  <Week key={uuid.v4()} week={week} today={today}/>)}
                 </div>
+            <button onClick={this.nextMonth.bind(this)}>Click</button>
             </div>
         )
     }
