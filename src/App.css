@@ -6,7 +6,7 @@ body {
   text-align: center;
 }
 
-.next-month-day {
+.next-month-day  .day-number {
   color: #9c9c9c;
 }
 
@@ -38,9 +38,11 @@ body {
 .table-body .table-row .table-data:first-child,
 .table-body .table-row .table-data:last-child {
   background:#f1f1f1;
-  color: #4d789b;
 }
-
+.table-body .table-row .table-data:first-child .day-number,
+.table-body .table-row .table-data:last-child  .day-number{
+  color: #2e73b5;
+}
 
 .table-head {
   display: table-cell;
@@ -55,4 +57,17 @@ body {
   height: 100px;
   width: 100px;
   max-width: 100px;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 350px;
+}
+
+.form button {
+  margin-left: auto;
+  margin-right: auto;
 }
