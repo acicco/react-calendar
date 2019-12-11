@@ -1,0 +1,2 @@
+export const ADD_REMINDER = 'ADD_REMINDER';
+export const GET_REMINDERS_BY_ID = 'GET_REMINDERS_BY_ID';
