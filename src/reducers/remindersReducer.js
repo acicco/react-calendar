@@ -1,22 +1,22 @@
-import {ADD_REMINDER, GET_REMINDERS_BY_ID} from '../actions/types';
+import { ADD_REMINDER, UPDATE_REMINDER } from '../actions/types';
 
 const initialState = {
     allReminders: []
 }
 
-export default function(state = initialState, action) {
-    switch(action.type) {
+export default function (state = initialState, action) {
+    switch (action.type) {
         case ADD_REMINDER:
-            let reminders = [...state.allReminders];    
+            let reminders = [...state.allReminders];
             reminders.push(action.payload);
             return {
                 ...state,
                 allReminders: reminders
             }
-        case GET_REMINDERS_BY_ID:
+        case UPDATE_REMINDER:
             return {
                 ...state,
-                allReminders: state.allReminders.filter(reminder => reminder.dayId !== action.payload)
+                allReminders: state.allReminders.map(reminder => reminder.id === action.payload.id ? action.payload : reminder)
             }
         default:
             return state;

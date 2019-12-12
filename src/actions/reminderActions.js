@@ -1,4 +1,4 @@
-import { ADD_REMINDER, GET_REMINDERS_BY_ID } from './types';
+import { ADD_REMINDER, UPDATE_REMINDER } from './types';
 
 export const addReminder = reminder => dispatch => {
     return dispatch({
@@ -7,9 +7,9 @@ export const addReminder = reminder => dispatch => {
     });
 }
 
-export const getReminderById = id => dispatch => {
+export const updateReminder = reminder => dispatch => {
     return dispatch({
-        type: GET_REMINDERS_BY_ID,
-        payload: id
+        type: UPDATE_REMINDER,
+        payload: reminder
     });
 }
