@@ -6,9 +6,9 @@ export default class Calendar extends Component {
     render() {
         return (
             <div>
-               <ReminderForm/>
-               <h2 className="title">Calendar</h2>
-               <Month/>
+                <ReminderForm inModal={false} />
+                <h2 className="title">Calendar</h2>
+                <Month />
             </div>
         )
     }
