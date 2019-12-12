@@ -36,4 +36,4 @@ class Day extends Component {
 const mapStateToProps = state => ({
     reminders: state.reminders
 });
-export default connect(mapStateToProps, { addReminder, getReminderById })(Day);
+export default connect(mapStateToProps, { addReminder })(Day);
