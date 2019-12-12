@@ -40,13 +40,8 @@ class ReminderForm extends React.Component {
     getWeather = async (city, date) => {
         let json = await axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&mode=jsonl&APPID=03da5164e7037f62d9922b5dcb99630b`);
         let data = await json.data;
-        let weatherData = await data.list.find(day => {
-            let weatherDate = moment(day.dt, 'X').format('D-M-YYYY');
-            if (weatherDate === date) {
-                return day;
-            }
-        });
-
+        let weatherData = await data.list.find(day => moment(day.dt, 'X').format('D-M-YYYY') === date);
+    
         return weatherData ? weatherData.weather[0].main : "-";
     }
 
@@ -103,7 +98,7 @@ class ReminderForm extends React.Component {
 
     render() {
         let { title, color, dateTime, city } = this.state;
-        const { inModal, month } = this.props;
+        const { inModal } = this.props;
         return (
             <form className="form" onSubmit={this.submit.bind(this)}>
                 <TextField placeholder="Title" helperText={title.length >= 30 ? 'The title is too long' : ''} error={title.length >= 30 ? true : false} type="text" onChange={this.handleType.bind(this)} value={title} />

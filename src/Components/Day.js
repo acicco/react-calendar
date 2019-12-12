@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addReminder, getReminderById } from '../actions/reminderActions';
+import { addReminder } from '../actions/reminderActions';
 import Reminders from './Reminders';
 
 

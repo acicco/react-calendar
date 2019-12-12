@@ -42,7 +42,7 @@ export default class Month extends Component {
         })
     }
     render() {
-        let { weeks, currentMonth, month, startDate, endDate} = this.state;
+        const { weeks, currentMonth, month, startDate, endDate} = this.state;
         return (
             <div className="month">
                 <ReminderForm inModal={false} month={{startDate, endDate}}/>
