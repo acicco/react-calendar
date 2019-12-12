@@ -1,4 +1,4 @@
-import {ADD_REMINDER, GET_REMINDERS_BY_ID} from './types';
+import { ADD_REMINDER, GET_REMINDERS_BY_ID } from './types';
 
 export const addReminder = reminder => dispatch => {
     return dispatch({
