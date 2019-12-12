@@ -5,6 +5,7 @@ export default class Reminder extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: props.reminder.id,
             title: props.reminder.title,
             dateTime: props.reminder.dateTime,
             city: props.reminder.city,
