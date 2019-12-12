@@ -1,5 +1,5 @@
 import { CirclePicker } from 'react-color';
-import { addReminder, getReminderById } from '../actions/reminderActions';
+import { addReminder, updateReminder } from '../actions/reminderActions';
 import { connect } from 'react-redux';
 import { monthInterval } from '../helpers/dateUtil';
 import Button from '@material-ui/core/Button';
@@ -11,12 +11,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import moment from 'moment';
 import React from 'react';
 import Select from '@material-ui/core/Select';
+import uuid from 'uuid';
 
 class ReminderForm extends React.Component {
     constructor(props) {
         super(props);
         if (props.inModal) {
             this.state = {
+                id: props.reminder.id,
                 title: props.reminder.title,
                 dateTime: props.reminder.dateTime,
                 city: props.reminder.city,
@@ -24,6 +26,7 @@ class ReminderForm extends React.Component {
             }
         } else {
             this.state = {
+                id: uuid.v4(),
                 title: "",
                 dateTime: moment(),
                 city: "",
@@ -51,22 +54,23 @@ class ReminderForm extends React.Component {
     }
 
     submit(e) {
-        const { addReminder, inModal } = this.props;
-        e.preventDefault();
-        let { title, dateTime, color, city } = this.state;
-        if (inModal) {
-            console.log('UPDATE', this.state);
-        } else {
-            let reminder = {
+        const { addReminder, updateReminder, inModal } = this.props;
+        let { id, title, dateTime, color, city } = this.state;
+        let reminder = {
+                id,
                 title,
                 dateTime,
                 city,
                 color,
                 date : dateTime.format('D-M-Y')
             };
-
+        e.preventDefault();
+        if (inModal) {
+            updateReminder(reminder);
+        } else {
             addReminder(reminder);
             this.setState({
+                id: uuid.v4(),
                 title: "",
                 dateTime: moment(),
                 city: "",
@@ -84,10 +88,8 @@ class ReminderForm extends React.Component {
             <form className="form" onSubmit={this.submit.bind(this)}>
                 <TextField placeholder="Title" helperText={title.length >= 30 ? 'The title is too long' : ''} error={title.length >= 30 ? true : false} type="text" onChange={this.handleType.bind(this)} value={title} />
                 <FormControl>
-                    <InputLabel id="demo-simple-select-label">City</InputLabel>
+                    <InputLabel>City</InputLabel>
                     <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
                         value={city}
                         onChange={this.handleSelect.bind(this)}
                     >
@@ -96,7 +98,7 @@ class ReminderForm extends React.Component {
                         <MenuItem value="Buenos Aires">Buenos Aires</MenuItem>
                     </Select>
                 </FormControl>
-                <InputLabel id="demo-simple-select-label">Color</InputLabel>
+                <InputLabel>Color</InputLabel>
                 <CirclePicker circleSize={15} width={100} colors={['#dce775', '#ff8a65', '#ba68c8']} color={color} onChangeComplete={this.handleChangeComplete} />
                 <DateTimePicker value={dateTime} minDate={startDate} maxDate={endDate} onChange={(dateTime) => this.setState({ dateTime })} />
                 <Button type="submit" disabled={(title.length === 0 || title.length >= 30) ? true : false} color="primary">{inModal ? 'Update Reminder' : 'Add Reminder'}</Button>
@@ -107,4 +109,4 @@ class ReminderForm extends React.Component {
 const mapStateToProps = state => ({
     reminders: state.reminders.allReminders
 });
-export default connect(mapStateToProps, { addReminder, getReminderById })(ReminderForm);
+export default connect(mapStateToProps, { addReminder, updateReminder })(ReminderForm);
