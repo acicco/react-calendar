@@ -43,8 +43,8 @@ export default class Reminder extends Component {
             <Fragment>
                 <div key={`${dateTime}-${title}`} style={reminderStyle} onClick={this.reminderDetails.bind(this)}>
                     <p>{title}</p>
+                    <p className="date-weather">Weather: {weather}</p>
                 </div>
-                <p className="date-weather">Weather: {weather}</p>
                 <SimpleModal isModalOpen={isModalOpen} reminder={this.state} closeModal={this.closeModal.bind(this)} month={month}/>
             </Fragment>
         )
