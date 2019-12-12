@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Modal from '@material-ui/core/Modal';
+import SimpleModal from './SimpleModal';
 
 export default class Reminder extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ export default class Reminder extends Component {
             isModalOpen: false
         }
     }
-    reminderDetails () {
+    reminderDetails() {
         this.openModal();
         console.log(this.state);
     }
@@ -30,26 +30,20 @@ export default class Reminder extends Component {
     }
 
     render() {
-        const {title, dateTime, city, color, isModalOpen} = this.state;
+        const { title, dateTime, color, isModalOpen } = this.state;
         const reminderStyle = {
-                        background: color,
-                        border: "1px",
-                        margin: "5px",
-                        fontSize: "12px"
-                    };
+            background: color,
+            border: "1px",
+            margin: "5px",
+            fontSize: "12px"
+        };
         return (
-            <div key={`${dateTime}-${title}`} style={reminderStyle} onClick={this.reminderDetails.bind(this)}>
-                {title}
-                <Modal
-                    aria-labelledby="simple-modal-title"
-                    aria-describedby="simple-modal-description"
-                    open={isModalOpen}
-                    onClose={this.closeModal.bind(this)}
-                >
-                    <h1>Hola</h1>
-                </Modal>
-                {city}
-            </div>
+            <>
+                <div key={`${dateTime}-${title}`} style={reminderStyle} onClick={this.reminderDetails.bind(this)}>
+                    {title}
+                </div>
+                <SimpleModal isModalOpen={isModalOpen} reminder={this.state} closeModal={this.closeModal.bind(this)}/>
+            </>
         )
     }
 }
