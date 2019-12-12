@@ -15,7 +15,7 @@ class Day extends Component {
     }
 
     isInSameMonth() {
-        return this.props.day.isSame(this.props.today, 'month');
+        return this.props.day.isSame(this.props.month, 'month');
     }
 
     addReminder(reminder) {
@@ -23,12 +23,10 @@ class Day extends Component {
     }
 
     render() {
-        // const {reminders} = this.state;
-        // TODO - SORT OUT FILTER PER DAY
         return (
             <div className={`day ${!this.isInSameMonth() ? 'next-month-day' : ''}`} >
                 <span className="day-number">{this.formattedDay()}</span>
-                <Reminders reminders={this.props.reminders.allReminders.filter(reminder => reminder.date === this.currentDate())} />
+                <Reminders reminders={this.props.reminders.allReminders.filter(reminder => reminder.date === this.currentDate())}/>
             </div>
         )
     }

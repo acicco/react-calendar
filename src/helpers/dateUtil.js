@@ -12,6 +12,7 @@ export function monthInterval(date) {
 }
 
 export function getMonth(date) {
+    const currentMonth = date.format('MMMM YYYY');
     const {startDate, endDate} = monthInterval(date);
     let days = [];
     let weeks = [];
@@ -27,6 +28,7 @@ export function getMonth(date) {
     }
 
     return {
+        currentMonth,
         weeks,
         startDate,
         endDate

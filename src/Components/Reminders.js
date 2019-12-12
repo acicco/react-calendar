@@ -8,9 +8,9 @@ export default class Reminders extends Component {
         const { reminders } = this.props;
         return (
             <div className="reminders">
-                {reminders.map(reminder => {
+                {reminders.sort((a, b) => a.dateTime - b.dateTime).map(reminder => {
                     return (
-                        <Reminder key={uuid.v4()} reminder={reminder} />
+                        <Reminder key={uuid.v4()} reminder={reminder}/>
                     )
                 })}
             </div>

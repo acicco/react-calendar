@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import SimpleModal from './SimpleModal';
 
 export default class Reminder extends Component {
@@ -10,12 +10,12 @@ export default class Reminder extends Component {
             dateTime: props.reminder.dateTime,
             city: props.reminder.city,
             color: props.reminder.color,
+            weather: props.reminder.weather,
             isModalOpen: false
         }
     }
     reminderDetails() {
         this.openModal();
-        console.log(this.state);
     }
 
     openModal() {
@@ -31,7 +31,8 @@ export default class Reminder extends Component {
     }
 
     render() {
-        const { title, dateTime, color, isModalOpen } = this.state;
+        const { title, dateTime, color, weather, isModalOpen } = this.state;
+        const {month} = this.props;
         const reminderStyle = {
             background: color,
             border: "1px",
@@ -39,12 +40,13 @@ export default class Reminder extends Component {
             fontSize: "12px"
         };
         return (
-            <>
+            <Fragment>
                 <div key={`${dateTime}-${title}`} style={reminderStyle} onClick={this.reminderDetails.bind(this)}>
-                    {title}
+                    <p>{title}</p>
                 </div>
-                <SimpleModal isModalOpen={isModalOpen} reminder={this.state} closeModal={this.closeModal.bind(this)}/>
-            </>
+                <p className="date-weather">Weather: {weather}</p>
+                <SimpleModal isModalOpen={isModalOpen} reminder={this.state} closeModal={this.closeModal.bind(this)} month={month}/>
+            </Fragment>
         )
     }
 }

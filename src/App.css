@@ -6,6 +6,10 @@ body {
   text-align: center;
 }
 
+.prev-next-month {
+  display: flex;
+  justify-content: space-between;
+}
 .next-month-day  .day-number {
   color: #9c9c9c;
 }
@@ -13,11 +17,21 @@ body {
 .day {
   display: block;
   height: 100%;
+  position: relative;
 }
 
 .day-number {
   margin-left: 10px;
   font-weight: bold;
+}
+
+.date-weather {
+  font-size: 10px;
+  color: gray;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0 10px 0 0;
 }
 
 /* Table */
@@ -70,4 +84,9 @@ body {
 .form button {
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Helpers */
+.is-text-center {
+  text-align: center;
 }
