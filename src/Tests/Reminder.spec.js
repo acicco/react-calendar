@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom/extend-expect';
-import * as actions from './actions/reminderActions';
-import * as types from './actions/types';
+import * as actions from '../actions/reminderActions';
+import * as types from '../actions/types';
 
 describe('Create a reminder', () => {
     const payload = {
