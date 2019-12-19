@@ -8,7 +8,7 @@ npm install
 ```
 Run the following command to start a development server and test the app in development mode.
 ```
-npm run serve
+npm start
 ```
 
 Run the following command to run the tests.
